@@ -47,13 +47,13 @@ def remove_files(n):
 
 remove_files(7)
 
-st.title("📸 Reconocimiento Óptico de Caracteres (OCR)")
-st.subheader("Elige la fuente de la imagen: desde cámara o cargando un archivo")
+st.title("📸 Reconocimiento Óptico de Caracteres ")
+st.subheader("Elige la fuente de la imagen: cámara o cargando un archivo")
 
 text = " "
 
 
-cam_ = st.checkbox("Usar Cámara")
+cam_ = st.checkbox("Usar Cámara?")
 if cam_:
     img_file_buffer = st.camera_input("Toma una foto")
 else:
@@ -95,7 +95,7 @@ if img_file_buffer is not None:
 
 
 with st.sidebar:
-    st.subheader("Parámetros de Traducción")
+    st.subheader("Parámetros")
 
     os.makedirs("temp", exist_ok=True)
     translator = Translator()
@@ -120,17 +120,17 @@ with st.sidebar:
         "South Africa": "co.za",
     }
 
-    in_lang = st.selectbox("Lenguaje de entrada", list(LANGUAGES.keys()))
-    out_lang = st.selectbox("Lenguaje de salida", list(LANGUAGES.keys()))
+    in_lang = st.selectbox("Lengua original", list(LANGUAGES.keys()))
+    out_lang = st.selectbox("Lenguaje de saliente", list(LANGUAGES.keys()))
     english_accent = st.selectbox("Acento", list(ACCENTS.keys()))
 
     input_language = LANGUAGES[in_lang]
     output_language = LANGUAGES[out_lang]
     tld = ACCENTS[english_accent]
 
-    display_output_text = st.checkbox("Mostrar texto traducido")
+    display_output_text = st.checkbox("Mostrar texto ")
 
-    if st.button("Convertir"):
+    if st.button("Tranformar"):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
